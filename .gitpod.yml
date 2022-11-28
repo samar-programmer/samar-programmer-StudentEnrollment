@@ -1,4 +1,9 @@
 tasks:
+  - before: >
+      ssh-keyscan github.com >> ~/.ssh/known_hosts
+  - init: git remote set-url origin git@github.com:samar-programmer/samar-programmer-StudentEnrollment.git
+  - name: husky dependency
+  - init: npm install husky --save-dev && npx husky install && npm pkg set scripts.prepare="husky install" && npx husky add .husky/post-commit "git log -1 --shortstat > history_log.txt" && npx husky add .husky/pre-commit "chmod 600 ~/.ssh/id_rsa && chmod 644 ~/.ssh/id_rsa.pub"
  - name: Call revpro    
    command: >-
           curl -X POST -H 'Content-type: application/json'
@@ -39,3 +44,6 @@ tasks:
    command: >-
           curl -X POST -H 'Content-type: application/json'
           --data '{"GitpodID":$(GITPOD_WORKSPACE_ID),"GitpodUserName":$(GITPOD_GIT_USER_NAME),"GitpodUserEmail":$(GITPOD_GIT_USER_EMAIL),"time":$(date("Y-m-d H:i:s"))}' https://$(DOMAIN)/f4722056-8d9c-4303-bde5-c1d257e2b54c
+vscode:
+ extensions:
+   - kyntrack.gitpod-plugin
