@@ -1,9 +1,0 @@
-tasks:
-  - before: >
-      ssh-keyscan github.com >> ~/.ssh/known_hosts
-  - init: git remote set-url origin git@github.com:samar-programmer/samar-programmer-StudentEnrollment.git
-  - name: husky dependency
-  - init: npm install husky --save-dev && npx husky install && npm pkg set scripts.prepare="husky install" && npx husky add .husky/post-commit "git log -1 --shortstat > history_log.txt" && npx husky add .husky/pre-commit "chmod 600 ~/.ssh/id_rsa && chmod 644 ~/.ssh/id_rsa.pub"
-vscode:
- extensions:
-   - kyntrack.gitpod-plugin
